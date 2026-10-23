@@ -2,14 +2,14 @@
 
 ## Project description
 
-We want to study how many people have to speak out in a group discussion before the majority comes to accept it as their opinion. We will recreate a fairly recent agent-based model of critical mass in social conventions, in which a committed minority can overturn an established norm, and then extend it so that agents differ in personality. 
+We want to study how many people have to *speak out* in a group discussion before the majority comes to accept their opinion. We will recreate a fairly recent agent-based model of critical mass in social conventions, in which a committed minority can overturn an established norm, and then extend it so that agents *differ in personality*. 
 
 Instead of identical agents, each agent gets parameters for: 
 - boldness (how likely they are to speak out), 
 - conformity (how readily it gives up its current view) and 
 - tolerance (how much disagreement it accepts).
   
-We will also model how strongly agents hold their belief. Our central question is **how the share of speakers needed for a majority shift changes with these traits and with group size.** The idea being that we parameterise the agents with real-world personality and political-attitude survey data.
+We will also model how strongly agents hold their belief. Our central question is **how the share of speakers needed for a majority shift changes with these traits and with group size.** The idea being that we parameterize the agents with real-world personality and political-attitude survey data.
  
 ## Team
 
