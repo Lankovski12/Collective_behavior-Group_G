@@ -1,0 +1,9 @@
+[project]
+name = "speaking-out"
+version = "0.1.0"
+description = "Critical mass in group discussions: agent-based extension of the higher-order naming game"
+requires-python = ">=3.10"
+dependencies = ["mesa>=3.3", "solara", "altair", "numpy", "pandas", "matplotlib", "networkx"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
