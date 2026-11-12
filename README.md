@@ -15,7 +15,7 @@ We will also model how strongly agents hold their belief. Our central question i
 
 | Name              | GitHub account  | Email                     |
 | ----------------- | --------------- | ------------------------- |
-| _Lana Tkalčič_    | _@Lanakovski12_ | lt80473@student.uni-lj.si |
+| _Lana Tkalčič_    | _@Lankovski12_ | lt80473@student.uni-lj.si |
 | _Matjaž Kranjčec_ | _@matjazi-k_    | mk92169@student.uni-lj.si |
 
 ## Starting point
