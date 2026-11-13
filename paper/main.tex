@@ -1,17 +1,13 @@
 \documentclass[9pt,twoside]{pnas-new}
 % Use the lineno option to display guide line numbers if required.
 
-\articletype{CLASSIFICATION}%%%% Article topic/classification
+\articletype{First report}%%%% Article topic/classification
 
 \templatetype{pnasmathematics} % Choose template
 % {pnasresearcharticle} = Template for a two-column research article
 % {pnasmathematics} = Template for a one-column mathematics article
 % {pnasinvited} = Template for a PNAS invited submission
 %\onecolumn
-
-% figures are produced by ../reproduce.py into ../figures/
-% (on Overleaf, upload them into a folder named figures/)
-\graphicspath{{../figures/}{figures/}}
 
 \begin{document}
 
@@ -203,9 +199,9 @@ example the boldest ones.
 
 \section{Results}
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{fig1.pdf}
+\includegraphics[width=\linewidth]{figures/fig1.png}
 \caption{Baseline model with groups of three under the unanimity rule.
 (a) Stationary fraction of agents holding only A, $n_A^{*}+p$, as a function
 of the committed fraction $p$. Lines show the mean-field solution of
@@ -313,7 +309,7 @@ traits one at a time, starting with conformity, compare each variant with the
 baseline presented here, and choose a survey dataset from which to estimate the
 trait distributions.
 
-\acknow{Individualni prispevki avtorjev ...}
+\acknow{LT mostly wrote the report and fixed some minor problems with the code. MK reimplemented the original article then reviewed and edited the report.}
 
 \showacknow{}
 
