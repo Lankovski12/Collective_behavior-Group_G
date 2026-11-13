@@ -3,3 +3,13 @@ __pycache__/
 .venv/
 .ipynb_checkpoints/
 results/
+# LaTeX build artifacts (compiled reports live in reports/)
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.synctex.gz
+paper/*.fls
+paper/*.fdb_latexmk
+paper/main.pdf
