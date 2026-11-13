@@ -16,6 +16,27 @@ import mesa
 A, B, AB = 1, 2, 3
 
 
+class RowCollector:
+    """Thread-safe replacement for mesa.DataCollector.
+
+    The Solara dashboard redraws plots from another thread while the model
+    steps. mesa.DataCollector appends to its columns one by one, so a redraw
+    in between sees columns of unequal length. Here each collected row is a
+    single list.append, which is atomic.
+    """
+
+    def __init__(self, reporters):
+        self.reporters = reporters
+        self.rows = []
+
+    def collect(self, model):
+        self.rows.append({k: f(model) for k, f in self.reporters.items()})
+
+    def get_model_vars_dataframe(self):
+        import pandas as pd
+        return pd.DataFrame(list(self.rows))
+
+
 class NamingGameAgent(mesa.Agent):
     def __init__(self, model, vocab: int, committed: bool = False):
         super().__init__(model)
@@ -63,16 +84,29 @@ class NamingGameModel(mesa.Model):
             else:
                 NamingGameAgent(self, vocab=B)
         self._agents_list = list(self.agents)
+        self._index = {a.unique_id: i for i, a in enumerate(self._agents_list)}
+        self.last_group = None  # (speaker_index, [hearer_indices]) of the latest interaction
+        self.layout = self._make_layout()
 
-        self.datacollector = mesa.DataCollector(
-            model_reporters={
-                "n_A": lambda m: m.fraction(A),
-                "n_B": lambda m: m.fraction(B),
-                "n_AB": lambda m: m.fraction(AB),
-                "interactions": lambda m: m.interactions,
-            }
-        )
+        self.datacollector = RowCollector({
+            "n_A": lambda m: m.fraction(A),
+            "n_B": lambda m: m.fraction(B),
+            "n_AB": lambda m: m.fraction(AB),
+            "interactions": lambda m: m.interactions,
+        })
         self.datacollector.collect(self)
+
+    def _make_layout(self):
+        """Fixed 2D positions for drawing (sunflower spiral, randomly assigned).
+
+        Homogeneous mixing has no real geometry, so positions carry no meaning;
+        they only give every agent a stable spot in the picture.
+        """
+        import numpy as np
+        i = np.arange(self.n)
+        r, th = np.sqrt(i + 0.5), i * 2.399963229728653
+        pts = np.column_stack([r * np.cos(th), r * np.sin(th)]) / np.sqrt(self.n)
+        return pts[self.rng.permutation(self.n)]
 
     # ---- observables -------------------------------------------------
     def fraction(self, vocab: int) -> float:
@@ -88,6 +122,7 @@ class NamingGameModel(mesa.Model):
     def interact(self):
         group = self.random.sample(self._agents_list, self.k)
         speaker, hearers = group[0], group[1:]
+        self.last_group = (self._index[speaker.unique_id], [self._index[h.unique_id] for h in hearers])
         name = speaker.speak()
 
         if self.rule == "unanimity":

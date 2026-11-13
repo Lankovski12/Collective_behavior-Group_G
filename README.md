@@ -27,6 +27,7 @@ Iacopini, I., Petri, G., Baronchelli, A. & Barrat, A. (2022). _Group interaction
 - Vilone & Polizzi (2023), _Modelling opinion misperception and the emergence of silence in online social system_, arXiv:2307.04475.
 
 ___
+
 ## Plan and milestones
 ### Milestone 1: first report
 
@@ -55,3 +56,70 @@ ___
 | Date           | Update                                    |
 | -------------- | ----------------------------------------- |
 | _23. 10. 2026_ | Repository created, project plan written. |
+| _13. 11. 2026_ | Reimplementation completed, first report written |
+
+___
+
+## Setup and usage
+
+The project requires Python 3.10 or newer. From the repository root, create and
+activate a virtual environment, then install the project and its dependencies:
+
+### Windows cmd
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -e .
+```
+
+### macOS/Linux
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e .
+```
+
+The installation includes the model and the required scientific Python
+packages, including Mesa, Solara, NumPy, SciPy, pandas, Matplotlib, and
+NetworkX.
+
+### Run the interactive app
+
+With the virtual environment activated, run:
+
+```bash
+solara run app.py
+```
+
+Open the local URL printed by Solara, usually
+`http://localhost:8765`. Stop the app with `Ctrl+C`; leave the virtual
+environment with `deactivate`.
+
+### Run tests
+
+Install pytest if it is not already available in the environment:
+
+```bash
+python -m pip install pytest
+python -m pytest
+```
+
+### Reproduce the figures
+
+For a short run:
+
+```bash
+python reproduce.py --quick
+```
+
+For the full reproduction:
+
+```bash
+python reproduce.py
+```
+
+The generated CSV files and figures are written to `figures/`.

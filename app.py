@@ -1,6 +1,7 @@
 """Interactive Solara dashboard:  solara run app.py"""
 from mesa.visualization import SolaraViz, make_plot_component, Slider
 from speaking_out import NamingGameModel
+from speaking_out.viz import COLORS, make_agent_plot_component
 
 model_params = {
     "seed": {"type": "InputText", "value": 42, "label": "Seed"},
@@ -16,7 +17,7 @@ model_params = {
 model = NamingGameModel()
 page = SolaraViz(
     model,
-    components=[make_plot_component(["n_A", "n_B", "n_AB"])],
+    components=[make_agent_plot_component(), make_plot_component({"n_A": COLORS[1], "n_B": COLORS[2], "n_AB": COLORS[3]})],
     model_params=model_params,
     name="Higher-order naming game (Iacopini et al. 2022)",
 )
